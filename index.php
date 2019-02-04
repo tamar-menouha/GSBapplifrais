@@ -6,27 +6,25 @@
  *
  * @category  PPE
  * @package   GSB
- * @author    Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
- * @copyright 2017 Réseau CERTA
- * @license   Réseau CERTA
- * @version   GIT: <0>
- * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
+ * @author    Tamar Menouha Sitruk
  */
 
 
-//ce qu'on a besoin en préliminaire
+//ce qu'on a besoin en préliminaire, ce sont les pages avec toutes les fonctions
 require_once 'includes/fct.inc.php';
 require_once 'includes/class.pdogsb.inc.php';
 
+// SESSION est une variable superglobale qui permet de comporter différentes variables tel visiteur, nom prénom ...
+// On démarre la session
 session_start();
-/*
- * session est une variable superglobale qui permet de comporter différentes variables tel visiteur, nom prénom ...
- */
+
+ 
 // On appelle la methode de la classe pdogsb
 $pdo = PdoGsb::getPdoGsb();
+
 // on appelle la methode de la classe fct.inc qui sert à vérifier si un client s'est connecté
 $estConnecte = estConnecte();
+
 require 'vues/v_entete.php';
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
 if ($uc && !$estConnecte) {

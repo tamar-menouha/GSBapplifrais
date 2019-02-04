@@ -6,12 +6,7 @@
  *
  * @category  PPE
  * @package   GSB
- * @author    Cheri Bibi - Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
- * @copyright 2017 Réseau CERTA
- * @license   Réseau CERTA
- * @version   GIT: <0>
- * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
+ * @author    Tamar Menouha Sitruk
  */
 
 /**
@@ -21,7 +16,20 @@
  */
 function estConnecte()
 {
-    return isset($_SESSION['idVisiteur']);
+    return isset($_SESSION['idutilisateur']);
+    // isset c'est retourne vrai si condition
+}
+
+function estVisiteurConnecte (){
+    if(estConnecte()){
+        return ($_SESSION['statut'] == 'visiteur');
+    }
+}
+
+function estComptableConnecte (){
+    if(estConnecte()){
+        return ($_SESSION['statut'] == 'comptable');
+    }
 }
 
 /**
@@ -33,11 +41,12 @@ function estConnecte()
  *
  * @return null
  */
-function connecter($idVisiteur, $nom, $prenom)
+function connecter($idUtilisateur, $nom, $prenom, $statut)
 {
-    $_SESSION['idVisiteur'] = $idVisiteur;
+    $_SESSION['idutilisateur'] = $idUtilisateur;
     $_SESSION['nom'] = $nom;
     $_SESSION['prenom'] = $prenom;
+    $_SESSION['statut'] = $statut;
 }
 
 /**
