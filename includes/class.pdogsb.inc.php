@@ -329,6 +329,9 @@ class PdoGsb
      */
     public function creeNouvellesLignesFrais($idVisiteur, $mois)
     {
+        //on relève lors du dernier mois saisi l'utilisateur, ainsi que l'utilisateur 
+        //et le dernier mois et on regarde si l'état est CR ou CL.
+        //S'il est CR, on modifie la base de donnée avec les nouvelles valeurs et on le met à CL
         $dernierMois = $this->dernierMoisSaisi($idVisiteur);
         $laDerniereFiche = $this->getLesInfosFicheFrais($idVisiteur, $dernierMois);
         if ($laDerniereFiche['idEtat'] == 'CR') {
@@ -432,7 +435,7 @@ class PdoGsb
             $mois = $laLigne['mois'];
             $numAnnee = substr($mois, 0, 4);
             $numMois = substr($mois, 4, 2);
-            $lesMois['$mois'] = array(
+            $lesMois[] = array(
                 'mois' => $mois,
                 'numAnnee' => $numAnnee,
                 'numMois' => $numMois
